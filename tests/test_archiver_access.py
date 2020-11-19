@@ -41,7 +41,7 @@ class ArchiverMethods(unittest.TestCase):
     def test02_TypeInfo(self):
         '''Use topup read current to check type info
         '''
-        meta_data = self.archiver.getTypeInfo('TOPUCC:rdCur')
+        meta_data = self.archiver.getTypeInfo('TOPUPCC:rdCur')
         print(meta_data)
 
 
