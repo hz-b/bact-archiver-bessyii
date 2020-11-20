@@ -1,6 +1,5 @@
 import logging
 import bact_archiver_bessyii
-from bact_archiver import convert_datetime_to_timestamp
 import unittest
 import datetime
 
@@ -33,7 +32,7 @@ class DateTimetoStringCompliance(unittest.TestCase, CheckTimestamp):
 
         Should be similar to '2020-11-19T11:37:02.000000Z'
         '''
-
+        from bact_archiver.archiver import convert_datetime_to_timestamp
         now = datetime.datetime.now()
         res = convert_datetime_to_timestamp(now)
         d2 = self.checkTimestampText(res)
@@ -68,10 +67,9 @@ class CArchiverTest(unittest.TestCase, CheckTimestamp):
         expect_n_lines = dt.total_seconds() / 1.0
 
         fmt = "Sending request for variable %s time span: %s..%s"
-        logger.debug(fmt, self.pvname, start_stamp, end_stamp)
+        logger.debug(fmt, self.pvname, t0, t1)
 
-        data = self.archiver.getData(self.pvname, t0=start_stamp,
-                                     t1=end_stamp)
+        data = self.archiver.getData(self.pvname, t0=t0, t1=t1)
         self.checkNumberOfLines(data, expect_n_lines)
 
     def test000_AroundToday(self):
@@ -83,16 +81,15 @@ class CArchiverTest(unittest.TestCase, CheckTimestamp):
         self.interval_seconds = 30 * 60
         t1 = t0 + datetime.timedelta(seconds=self.interval_seconds)
 
-        start_stamp = convert_datetime_to_timestamp(t0)
-        end_stamp = convert_datetime_to_timestamp(t1)
+        start_stamp = t0
+        end_stamp = t1
 
         # One reading per second roughly
         expect_n_lines = self.interval_seconds / 1.0
 
-        fmt = "Sending request for variable %s time span: %s..%s, %s..%s"
-        logger.debug(fmt, self.pvname, t0, t1, start_stamp, end_stamp)
-        data = self.archiver.getData(self.pvname, t0=start_stamp,
-                                     t1=end_stamp)
+        fmt = "Sending request for variable %s time span: %s..%s (types %s, %s)"
+        logger.debug(fmt, self.pvname, t0, t1, type(t0), type(t1))
+        data = self.archiver.getData(self.pvname, t0=t0, t1=t1)
         self.checkNumberOfLines(data, expect_n_lines)
 
 

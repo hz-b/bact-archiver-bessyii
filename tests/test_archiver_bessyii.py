@@ -15,7 +15,7 @@ class BESSYIIArchivers(unittest.TestCase):
         '''
         archivers = bact_archiver_bessyii.archivers
         keys = list(archivers.keys())
-        self.assertEqual(len(keys), 5)
+        self.assertEqual(len(keys), 6)
 
 
 if __name__ == '__main__':

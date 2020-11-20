@@ -1,5 +1,4 @@
 import bact_archiver_bessyii
-from bact_archiver import convert_datetime_to_timestamp
 
 import unittest
 import datetime
@@ -28,12 +27,8 @@ class CArchiverTest(unittest.TestCase):
         self.interval_seconds = 30 * 60
         t1 = t0 + datetime.timedelta(seconds=self.interval_seconds)
 
-        # print(t0, t1)
-        self.start_stamp = convert_datetime_to_timestamp(t0)
-        self.end_stamp = convert_datetime_to_timestamp(t1)
-
-        # self.start_stamp = '2020-03-19T18:31:02.000000Z'
-        # self.end_stamp = '2020-03-19T18:34:41.000000Z'
+        self.start_stamp = t0
+        self.end_stamp = t1
 
         self.expect_n_lines = self.interval_seconds / 2.0
 

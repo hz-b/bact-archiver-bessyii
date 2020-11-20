@@ -1,9 +1,6 @@
 import bact_archiver_bessyii
-from bact_archiver import convert_datetime_to_timestamp
 
-import numpy as np
 import unittest
-import datetime
 import logging
 
 logger = logging.getLogger('bact')
