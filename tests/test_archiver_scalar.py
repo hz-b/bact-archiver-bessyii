@@ -92,6 +92,10 @@ class CArchiverTest(unittest.TestCase, CheckTimestamp):
         data = self.archiver.getData(self.pvname, t0=t0, t1=t1)
         self.checkNumberOfLines(data, expect_n_lines)
 
+        # see if data can also be read as datetime
+        data = self.archiver.getData(self.pvname, t0=t0, t1=t1, time_format='datetime')
+        print(data)
 
+        
 if __name__ == '__main__':
     unittest.main()
