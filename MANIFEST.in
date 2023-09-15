@@ -1,2 +1,2 @@
 # configuration files
-include config/*.cfg
+include bact_archiver_bessyii/*.cfg
