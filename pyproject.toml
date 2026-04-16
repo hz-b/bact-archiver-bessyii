@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bact-archiver-bessyii"
-version = "0.2.1"
+version = "0.2.2"
 description = "EPICS archiver appliance access using google protobuf. Configuration for BESSY II"
 readme = "README.md"
 license = { file = "LICENSE" }
