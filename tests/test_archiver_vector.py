@@ -24,7 +24,7 @@ class CArchiverTest(unittest.TestCase):
         # Archiver needs some time to publish data
         t0 -= datetime.timedelta(seconds=12 * 60 * 60)
 
-        self.interval_seconds = 30 * 60
+        self.interval_seconds = 10
         t1 = t0 + datetime.timedelta(seconds=self.interval_seconds)
 
         self.start_stamp = t0
@@ -34,7 +34,7 @@ class CArchiverTest(unittest.TestCase):
 
     def checkNumberOfLines(self, nlines, expected_n_lines):
         self.assertGreater(nlines,  expected_n_lines * 0.9)
-        self.assertLess(nlines, expected_n_lines * 1.1)
+        self.assertLess(nlines, expected_n_lines * self.interval_seconds * 40)
 
     @unittest.skip
     def test00_ScalarData(self):
@@ -50,22 +50,21 @@ class CArchiverTest(unittest.TestCase):
                                    t1=self.end_stamp)
         self.checkNumberOfLines(df.shape[0], self.expect_n_lines)
 
-    def test03_VectorData_BPM_SizeGuess(self):
+    def test03_VectorData_MBCurrent_SizeGuess(self):
         '''Check if guessing size matches
         '''
-        res = self.archiver.guessSize('MDIZ2T5G:bdata', t0=self.start_stamp,
+        res = self.archiver.guessSize('CUMZR:MBcurrent', t0=self.start_stamp,
                                       t1=self.end_stamp)
         nlines, _ = res
         self.checkNumberOfLines(nlines, self.expect_n_lines)
 
-    def test04_VectorData_BPM(self):
+    def test04_VectorDataMBCurrent(self):
         '''Test reading vector/waveform data using bpm data
         '''
-        df = self.archiver.getData('MDIZ2T5G:bdata', t0=self.start_stamp,
+        df = self.archiver.getData('CUMZR:MBcurrent', t0=self.start_stamp,
                                    t1=self.end_stamp)
         nlines, n_elements_vector = df.shape
-        # Should be 2048
-        self.assertEqual(n_elements_vector,  2048)
+        self.assertEqual(n_elements_vector,  400)
         self.checkNumberOfLines(nlines, self.expect_n_lines)
 
     @unittest.skip

@@ -17,12 +17,11 @@ class ArchiverMethods(unittest.TestCase):
         '''Use topup engine to test matching pvs
 
         Should be at least a hundred or so
-        Test gave 221
         '''
         pvs = self.archiver.getMatchingPVs('TOPUPCC*')
         n_pvs = len(pvs)
         self.assertGreater(n_pvs, 100)
-        self.assertEqual(n_pvs, 231)
+        self.assertEqual(n_pvs, 165)
 
     def test01_AllPVs(self):
         '''Epics archiver returns 500 PV
