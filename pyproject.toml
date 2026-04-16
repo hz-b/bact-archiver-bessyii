@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bact-archiver-bessyii"
+version = "0.2.1"
+description = "EPICS archiver appliance access using google protobuf. Configuration for BESSY II"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Pierre Schnizer", email = "pierre.schnizer@helmholtz-berlin.de" },
+  { name = "Andreas Schälicke", email = "andreas.schaelicke@helmholtz-berlin.de" },
+]
+dependencies = [
+  "bact-archiver>=0.4.0",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Physics",
+]
+
+[project.urls]
+Homepage = "https://github.com/hz-b/bact-archiver-bessyii"
+Repository = "https://github.com/hz-b/bact-archiver-bessyii"
+
+
+# ---- Hatch configuration ----
+
+[tool.hatch.build.targets.wheel]
+packages = ["bact_archiver_bessyii"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/README.md",
+  "/LICENSE",
+  "/bact_archiver_bessyii/archiver.cfg",
+    "/tests",
+]
+
+[tool.hatch.envs.default]
+dependencies = [
+    "pytest",
+]
+
+[tool.hatch.envs.default.scripts]
+test = "pytest"
