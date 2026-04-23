@@ -48,7 +48,7 @@ jobs:
       uses: pypa/gh-action-pypi-publish@release/v1
 
   github-release:
-    name: Sign bact-archiver-bessyii with Sigstore and upload them to GitHub Release
+    name: Sign bact-archiver with Sigstore and upload them to GitHub Release
     needs:
     - publish-to-pypi
     runs-on: ubuntu-latest
@@ -94,7 +94,7 @@ jobs:
 
     environment:
       name: testpypi
-      url: https://test.pypi.org/p/bact-archiver-bessyii
+      url: https://test.pypi.org/p/bact-archiver
 
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
